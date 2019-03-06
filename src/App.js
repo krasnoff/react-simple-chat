@@ -17,7 +17,6 @@ class App extends Component {
 
   handleKeyPress = (event) => {
     if(event.key === 'Enter'){
-      console.log('enter press here! ')
       if (event.target.id === 'txtUserA') {
         this.props.addChat({value: this.state.txtUserA, key: 'txtUserA'});
         this.setState({ txtUserA: "" });
@@ -38,14 +37,19 @@ class App extends Component {
       <div className="container chatWindow">
         <div className="row">
           <div className="col-sm">
-            messages
+            {this.props.chats.map(el => (
+              <div key={el.id} className={el.key}>{el.value}</div>
+            ))}
           </div>
         </div>
+        <hr />
         <div className="row">
           <div className="col-sm">
+            User A<br />
             <input type="text" id="txtUserA" onChange={this.handleChange} onKeyPress={this.handleKeyPress} value={this.state.txtUserA} />
           </div>
           <div className="col-sm">
+            User B<br />
             <input type="text" id="txtUserB" onChange={this.handleChange} onKeyPress={this.handleKeyPress} value={this.state.txtUserB} />
           </div>
         </div>
@@ -57,7 +61,8 @@ class App extends Component {
 // get response from redux
 function mapStateToProps(state) {
   return {
-    chats: state.chats
+    chats: state.chats,
+    error: state.error
   };
 }
 

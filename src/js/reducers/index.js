@@ -7,6 +7,8 @@ const initialState = {
 
 function rootReducer(state = initialState, action) {
     if (action.type === ADD_CHAT) {
+        action.payload.id = state.chats.length + 1;
+        
         return Object.assign({}, state, {
             chats: state.chats.concat(action.payload),
             error: null
