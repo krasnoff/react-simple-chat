@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { connect } from "react-redux";
+import { addChat } from "./js/actions/index";
 import './App.css';
 
 class App extends Component {
@@ -16,7 +18,14 @@ class App extends Component {
   handleKeyPress = (event) => {
     if(event.key === 'Enter'){
       console.log('enter press here! ')
-
+      if (event.target.id === 'txtUserA') {
+        this.props.addChat({value: this.state.txtUserA, key: 'txtUserA'});
+        this.setState({ txtUserA: "" });
+      }
+      else if (event.target.id === 'txtUserB') {
+        this.props.addChat({value: this.state.txtUserB, key: 'txtUserB'});
+        this.setState({ txtUserB: "" });
+      }
     }
   }
 
@@ -45,4 +54,21 @@ class App extends Component {
   }
 }
 
-export default App;
+// get response from redux
+function mapStateToProps(state) {
+  return {
+    chats: state.chats
+  };
+}
+
+// pass parameters to redux
+function mapDispatchToProps(dispatch) {
+  return {
+    addChat: args => dispatch(addChat(args))
+  };
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(App);
