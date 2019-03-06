@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
 import { addChat } from "./js/actions/index";
+import FormInput from "./formInput/formInput";
 import './App.css';
 
 class App extends Component {
@@ -62,14 +63,10 @@ class App extends Component {
         <hr />
         <div className="row">
           <div className="col-sm">
-            <div className="txtUser txtUserA"><i className="fas fa-user"></i>&nbsp;User A</div>
-            { this.state.originalTextA ? <pre className="form">{ this.state.originalTextA }</pre> : null }
-            <input type="text" id="txtUserA" onChange={this.handleChange} onKeyPress={this.handleKeyPress} value={this.state.txtUserA} />
+            <FormInput classDef="txtUserA" originalText={this.state.originalTextA} value={this.state.txtUserA} change={this.handleChange} keyPress={this.handleKeyPress}></FormInput>
           </div>
           <div className="col-sm">
-            <div className="txtUser txtUserB"><i className="far fa-user"></i>&nbsp;User B</div>
-            { this.state.originalTextB ? <pre className="form">{ this.state.originalTextB }</pre> : null }
-            <input type="text" id="txtUserB" onChange={this.handleChange} onKeyPress={this.handleKeyPress} value={this.state.txtUserB} />
+            <FormInput classDef="txtUserB" originalText={this.state.originalTextB} value={this.state.txtUserB} change={this.handleChange} keyPress={this.handleKeyPress}></FormInput>
           </div>
         </div>
       </div>
