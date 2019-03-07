@@ -3,6 +3,7 @@ import { shallow, configure } from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16';
 import FormInput from './formInput';
 
+// checks if the inner component "FormInput" has been built correctly
 describe('<FormInput />', () => {
     it('render correctly FormInput component - input', () => {  
         configure({ adapter: new Adapter() });
